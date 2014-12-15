@@ -2,23 +2,26 @@
     <div class="page-header">
         <h1>Flapper News</h1>
     </div>
-
-    <div ng-repeat="post in posts | orderBy:'-upvotes'">
+<table class="table table-striped">
+ <tbody ng-repeat="post in posts | orderBy:'-upvotes'">
+ <tr><td>
         <span class="glyphicon glyphicon-thumbs-up"
               ng-click="incrementUpvotes(post)"></span>
-        {{post.upvotes}}
-        <span style="font-size:20px; margin-left:10px;">
+        {{post.upvotes}}</td></tr>
+         <tr><td><span style="font-size:20px; margin-left:10px;">
             <a ng-show="post.link" href="{{post.link}}">
                 {{post.title}}
-            </a>
-            <span ng-hide="post.link">
+            </a></td></tr>
+            <tr><td><span ng-hide="post.link">
                 {{post.title}}
             </span>
+            posted by <a ng-href="#/users/{{post.user.username}}">{{post.user.username}}</a>
         </span>
         <span>
             <a href="#/posts/{{post.id}}">Comments</a>
-        </span>
-    </div>
+        </span></td></tr>
+    </tbody>
+    </table>
 
     <form ng-submit="addPost()"
           style="margin-top:30px;">

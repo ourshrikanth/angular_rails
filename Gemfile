@@ -34,7 +34,7 @@ end
 
 gem 'angular-rails-templates'
 gem 'angular_rails_csrf'
-
+gem 'devise', '~> 3.4.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 

@@ -11,16 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141121115728) do
-
-  create_table "chapters", force: true do |t|
-    t.integer  "course_id"
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "chapters", ["course_id"], name: "index_chapters_on_user_id", using: :btree
+ActiveRecord::Schema.define(version: 20141125055726) do
 
   create_table "comments", force: true do |t|
     t.string   "body"
@@ -28,18 +19,11 @@ ActiveRecord::Schema.define(version: 20141121115728) do
     t.integer  "post_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   add_index "comments", ["post_id"], name: "index_comments_on_post_id", using: :btree
-
-  create_table "courses", force: true do |t|
-    t.string   "name"
-    t.string   "description"
-    t.string   "duration"
-    t.string   "charge"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "posts", force: true do |t|
     t.string   "title"
@@ -47,16 +31,10 @@ ActiveRecord::Schema.define(version: 20141121115728) do
     t.integer  "upvotes"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
-  create_table "sylabuses", force: true do |t|
-    t.integer  "course_id"
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "sylabuses", ["course_id"], name: "index_sylabuses_on_user_id", using: :btree
+  add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -71,9 +49,11 @@ ActiveRecord::Schema.define(version: 20141121115728) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "username"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
 end
